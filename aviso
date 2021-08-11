@@ -1,0 +1,24 @@
+#!/bin/bash
+
+data=$(date +'%d-%m-%Y')
+hora=$(date "+%r" )
+
+curl -s -X POST https://api.telegram.org/bot1907899236:AAEtA4EIYpPeByrOum5YXmHXTcX1vNLEMXM/sendMessage -d chat_id=<chatid> -d text="O computador foi ligado no dia $data as $hora logado como $USER"
+
+nome=$(zenity --entry --width=250 --text="Quem esta usando o computador, favor digitar o nome completo ?")
+
+if [ -z $nome ]
+then
+    zenity --info --width=150 --text="Digite seu nome"
+
+    aviso
+else
+    case $nome in
+        guhzoide) exit ;; 
+
+        *) curl -s -X POST https://api.telegram.org/bot1907899236:AAEtA4EIYpPeByrOum5YXmHXTcX1vNLEMXM/sendMessage -d chat_id=<chatid> -d text="Nome: $nome"
+           zenity --error --timeout=5 --width=500 --height=500 --text="******USUARIO INVÁLIDO, DESLIGANDO COMPUTADOR******"
+           init 0;;
+    esac
+fi
+
