@@ -1,0 +1,11 @@
+https://api.telegram.org/bot1907899236:AAEtA4EIYpPeByrOum5YXmHXTcX1vNLEMXM/getUpdates
+
+1907899236:AAEtA4EIYpPeByrOum5YXmHXTcX1vNLEMXM
+
+-526461084
+
+-1001400401468
+
+curl -s -X POST https://api.telegram.org/bot1907899236:AAEtA4EIYpPeByrOum5YXmHXTcX1vNLEMXM/sendMessage -d chat_id=-1001400401468 -d text="Muito legal estar aqui pessoal!"
+
+
