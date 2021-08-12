@@ -13,7 +13,7 @@ do
 done
 
 case $nome in
-	<condição_para_sair>) exit ;; 
+	< condição_para_sair >) exit ;;    
 
         *) curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="Nome: $nome"
            zenity --error --timeout=5 --width=500 --height=500 --text="******USUARIO INVÁLIDO, DESLIGANDO COMPUTADOR******"
