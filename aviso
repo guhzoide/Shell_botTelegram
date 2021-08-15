@@ -1,21 +1,26 @@
 #!/bin/bash
 
+#guarda a hora e a data que o script roda
 data=$(date +'%d-%m-%Y')
 hora=$(date "+%r" )
 
+#manda a msg com os resultado das variaveis
 curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="O computador foi ligado no dia $data as $hora logado como $USER"
 
+#pergunta de seguranca
 nome=$(zenity --entry --width=250 --text="Digite seu nome ?")
 
+#caso a variavel 'nome' esteja vazia a pergunta persiste 
 while [ -z $nome ]
 do	
 	nome=$(zenity --entry --width=250 --text="Digite seu nome ?")
 done
 
+#avalia a resposta de seguranca e toma as medidas descritas dentro do 'case'
 case $nome in
-	< condição_para_sair >) exit ;;    
+	< condição>) #acao ;;    
 
         *) curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="Nome: $nome"
            zenity --error --timeout=5 --width=500 --height=500 --text="******USUARIO INVÁLIDO, DESLIGANDO COMPUTADOR******"
-           init 0;;
+           #acao ;;
 esac
