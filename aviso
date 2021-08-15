@@ -24,3 +24,5 @@ case $nome in
            zenity --error --timeout=5 --width=500 --height=500 --text="******USUARIO INVÁLIDO, DESLIGANDO COMPUTADOR******"
            #acao ;;
 esac
+
+# Hugo Ferreira - 15/08/2021
