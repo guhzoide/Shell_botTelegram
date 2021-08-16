@@ -21,7 +21,7 @@ case $nome in
 	< condição>) #acao ;;    
 
         *) curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="Nome: $nome"
-           zenity --error --timeout=5 --width=500 --height=500 --text="******USUARIO INVÁLIDO, DESLIGANDO COMPUTADOR******"
+           zenity --error --timeout=5 --width=250 --height=250 --text="******USUARIO INVÁLIDO, DESLIGANDO COMPUTADOR******"
            #acao ;;
 esac
 
