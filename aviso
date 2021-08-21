@@ -7,21 +7,21 @@ hora=$(date "+%r" )
 #manda a msg com os resultado das variaveis
 curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="O computador foi ligado no dia $data as $hora logado como $USER"
 
-#pergunta de seguranca
-nome=$(zenity --entry --width=250 --text="Digite seu nome ?")
+#senha de seguranca
+pass=$(zenity --password --width=250)
 
-#caso a variavel 'nome' esteja vazia a pergunta persiste 
-while [ -z $nome ]
+#caso a variavel 'pass' esteja vazia a pergunta persiste 
+while [ -z $pass ]
 do	
-	nome=$(zenity --entry --width=250 --text="Digite seu nome ?")
+	pass=$(zenity --password --width=250)
 done
 
-#avalia a resposta de seguranca e toma as medidas descritas dentro do 'case'
-case $nome in
+#avalia a senha de seguranca e toma as medidas descritas dentro do 'case'
+case $pass in
 	< condição>) #acao ;;    
 
         *) curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="Nome: $nome"
-           zenity --error --timeout=5 --width=250 --height=250 --text="******USUARIO INVÁLIDO, DESLIGANDO COMPUTADOR******"
+           zenity --error --timeout=5 --width=250 --height=250 --text="****** SENHA INVÁLIDA, DESLIGANDO COMPUTADOR ******"
            #acao ;;
 esac
 
