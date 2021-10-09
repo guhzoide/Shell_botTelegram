@@ -1,28 +1,25 @@
 #!/bin/bash
 
-#guarda a hora e a data que o script roda
 data=$(date +'%d-%m-%Y')
 hora=$(date "+%r" )
 
-#manda a msg com os resultado das variaveis
-curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="O computador foi ligado no dia $data as $hora logado como $USER"
+curl -s -X POST https://api.telegram.org/bot<bot_id>/sendMessage -d chat_id=<chat_id> -d text="Your PC has been powered on day $data at $hora logged in as $USER"
 
-#senha de seguranca
-pass=$(zenity --password --width=250)
-
-#caso a variavel 'pass' esteja vazia a pergunta persiste 
 while [ -z $pass ]
 do	
-	pass=$(zenity --password --width=250)
+pass=$(zenity --password --width=250)
 done
-
-#avalia a senha de seguranca e toma as medidas descritas dentro do 'case'
-case $pass in
-	< condição>) #acao ;;    
-
-        *) curl -s -X POST https://api.telegram.org/bot<TOKENBOT>/sendMessage -d chat_id=<chatid> -d text="Nome: $nome"
-           zenity --error --timeout=5 --width=250 --height=250 --text="****** SENHA INVÁLIDA, DESLIGANDO COMPUTADOR ******"
-           #acao ;;
-esac
+	
+pass1=$(cat /usr/bin/pass.txt)
+	
+if [ $pass == $pass1 ]
+then
+	zenity --info --width=150 --timeout=3 --title=":)" --text="Wellcome"
+        curl -s -X POST https://api.telegram.org/bot<bot_id>/sendMessage -d chat_id=<chat_id> -d text="Wellcome $USER"
+else
+	curl -s -X POST https://api.telegram.org/bot<bot_id>/sendMessage -d chat_id=<chat_id> -d text="User access attempt $USER"
+	zenity --error --timeout=5 --width=450 --text="****** Worong password, a alert has been sended to the owner ******"
+        systemctl poweroff -i
+fi 
 
 # Hugo Ferreira - 15/08/2021
